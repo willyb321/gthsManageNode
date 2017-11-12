@@ -18,6 +18,9 @@ const key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa')
 export function connect(commands: Array<string>) {
 	return new Promise((resolve, reject) => {
 		const newcmds = commands.join('&&');
+		if (Object.keys(conf.all).length < 4) {
+			reject(new Error('run `gthsmanage configcreate` first'));
+		}
 		const seq = sequest(`willb@${conf.get('ip')}:${conf.get('port')}`, {
 			command: newcmds,
 			privateKey: key

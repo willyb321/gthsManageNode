@@ -8,26 +8,88 @@ yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 		return commands.getConfig();
 	})
 	.command('configcreate', 'Create config', {}, () => {
-		return commands.createConfig();
+		commands.createConfig()
+			.then(data => {
+
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
 	})
-	.command('isdeployed', 'Create config', {}, () => {
-		return commands.deployed();
+	.command('isdeployed', 'Check if deployed', {}, () => {
+		commands.deployed()
+			.then(data => {
+
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
 	})
-	.command('isrebootrequired', 'Create config', {}, () => {
-		return commands.isRebootRequired();
+	.command('isrebootrequired', 'Check if reboot required', {}, () => {
+		commands.isRebootRequired()
+			.then(data => {
+
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
 	})
-	.command('reboot', 'Create config', {}, () => {
-		return commands.reboot();
+	.command('reboot', 'Reboot the noticeboard', {}, () => {
+		commands.reboot()
+			.then(data => {
+				console.log('Rebooting. Give it about 20 minutes at most.')
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
 	})
-	.command('update', 'Create config', {}, () => {
-		return commands.update();
+	.command('update', 'Update packages', {}, () => {
+		commands.update()
+			.then(data => {
+				console.log('Noticeboard updated');
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
 	})
-	.command('generatesshkey', 'Create config', {}, () => {
-		return commands.genSSHKey();
-	})
-	.command('test', 'Create config', {}, async () => {
-		await commands.deployed();
-		return;
+	.command('generatesshkey', 'Generate an SSH key', {}, () => {
+		commands.genSSHKey()
+			.then(data => {
+
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
 	})
 	.demandCommand(1)
 	.option('h', {
