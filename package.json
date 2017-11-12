@@ -1,6 +1,6 @@
 {
 	"name": "gths-manage",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "gths-manage",
 	"bin": "gthsManage",
 	"license": "MIT",
