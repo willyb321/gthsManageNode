@@ -2,7 +2,6 @@
 	"name": "gths-manage",
 	"version": "0.1.0",
 	"description": "gths-manage",
-	"bin": "gthsManage",
 	"license": "MIT",
 	"repository": "willyb321/gthsManageNode",
 	"author": {
