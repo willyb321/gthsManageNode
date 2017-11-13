@@ -5,22 +5,23 @@ import * as yargs from 'yargs';
 const pkg = require('../package.json');
 
 yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
-	.command('configget', 'Get config', {}, () => {
-		return commands.getConfig();
-	})
-	.command('configcreate', 'Create config', {}, () => {
-		commands.createConfig()
-			.then(data => {
-
-			})
-			.catch(err => {
-				if (err.message === 'run `gthsmanage configcreate` first') {
-					commands.createConfig();
-					return;
-				} else {
-					console.log(err);
-				}
-			});
+	.command('config', 'Get config', (yargs) => {
+		return yargs.option('set', {
+			alias: 's',
+			describe: 'Set config'
+		}).option('get', {
+			alias: 'g',
+			describe: 'Get config'
+		})
+	}, (argv) => {
+		if (argv.get) {
+			return commands.getConfig();
+		} else if (argv.set) {
+			commands.createConfig()
+				.then(data => {
+					console.log('Config set.');
+				});
+		}
 	})
 	.command('isdeployed', 'Check if deployed', {}, () => {
 		commands.deployed()
@@ -82,6 +83,24 @@ yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 		commands.genSSHKey()
 			.then(data => {
 
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
+	})
+	.command('deploy', 'Deploy the noticeboard.', (yargs) => {
+		return yargs.option('fresh', {
+			alias: 'f',
+			describe: 'Only use if Chrome isn\'t already open'
+		})
+	}, (argv) => {
+		commands.deploy(argv.fresh)
+			.then(data => {
 			})
 			.catch(err => {
 				if (err.message === 'run `gthsmanage configcreate` first') {

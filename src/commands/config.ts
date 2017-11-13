@@ -5,13 +5,13 @@ import * as os from 'os';
 
 const pkg = require('../../package.json');
 
-export const conf = new Configstore(pkg.name);
+export const conf: Configstore = new Configstore(pkg.name);
 
 /**
  * Asks questions and makes a config.
  */
 export function createConfig() {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const questions = [
 			{
 				type: 'input',
@@ -67,7 +67,7 @@ interface ConfigAnswers {
  * Prints the config
  */
 export function getConfig() {
-	const all = conf.all;
+	const all: object = conf.all;
 	for (const i in all) {
 		if (all.hasOwnProperty(i)) {
 			console.log(`${i}: ${all[i]}`);

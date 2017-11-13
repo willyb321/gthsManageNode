@@ -1,4 +1,4 @@
-import { connect } from "./index";
+import {connect} from './connect';
 
 /**
  * Update packages on the noticeboard.
