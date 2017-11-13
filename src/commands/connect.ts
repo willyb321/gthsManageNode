@@ -8,12 +8,6 @@ process.on('uncaughtException', err => {
 	console.log(err);
 });
 let key;
-if (existsSync(conf.get('sshkey'))) {
-	key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
-
-} else {
-	key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
-}
 
 /**
  * Run commands on noticeboard.
@@ -22,6 +16,14 @@ if (existsSync(conf.get('sshkey'))) {
  */
 export function connect(commands: Array<string>) {
 	return new Promise((resolve, reject) => {
+		if (existsSync(conf.get('sshkey'))) {
+			key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
+
+		} else if (existsSync(join(homedir(), '.ssh', 'id_rsa'))) {
+			key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
+		} else {
+			console.log('Can\'t Find an SSH key.');
+		}
 		const newcmds = commands.join('&&');
 		if (Object.keys(conf.all).length < 4) {
 			reject(new Error('run `gthsmanage configcreate` first'));
