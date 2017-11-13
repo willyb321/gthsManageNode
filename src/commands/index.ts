@@ -6,3 +6,4 @@ export * from './rebootrequired';
 export * from './update';
 export * from './deployed';
 export * from './deploy';
+export * from './logs';

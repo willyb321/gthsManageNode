@@ -93,6 +93,19 @@ yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 				}
 			});
 	})
+	.command('getlogs', 'Get noticeboard logs', {}, () => {
+		commands.getLogs()
+			.then(data => {
+			})
+			.catch(err => {
+				if (err.message === 'run `gthsmanage configcreate` first') {
+					commands.createConfig();
+					return;
+				} else {
+					console.log(err);
+				}
+			});
+	})
 	.command('deploy', 'Deploy the noticeboard.', (yargs) => {
 		return yargs.option('fresh', {
 			alias: 'f',
