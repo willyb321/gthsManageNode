@@ -28,7 +28,7 @@ export function createConfig() {
 				type: 'input',
 				name: 'sshkey',
 				message: 'Path to SSH key?',
-				default: () => path.join(os.homedir(), ".ssh", "id_rsa")
+				default: () => path.join(os.homedir(), ".ssh", "id_rsa").toString()
 			},
 			{
 				type: 'input',

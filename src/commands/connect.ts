@@ -1,14 +1,19 @@
 import * as sequest from 'sequest';
 import {conf} from './config';
-import {readFileSync} from 'fs';
+import {existsSync, readFileSync} from 'fs';
 import {join} from 'path';
 import {homedir} from 'os';
 
 process.on('uncaughtException', err => {
 	console.log(err);
 });
+let key;
+if (existsSync(conf.get('sshkey'))) {
+	key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
 
-const key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
+} else {
+	key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
+}
 
 /**
  * Run commands on noticeboard.
