@@ -1,4 +1,4 @@
-import {connect} from "./connect";
+import {connect} from './connect';
 /**
  * Run the noticeboard deploy script
  * @param {boolean} fresh - If true, chrome will be opened (only use if its not already open)

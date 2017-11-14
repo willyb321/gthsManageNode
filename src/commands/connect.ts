@@ -7,6 +7,7 @@ import {homedir} from 'os';
 process.on('uncaughtException', err => {
 	console.log(err);
 });
+
 let key;
 
 /**
@@ -23,6 +24,7 @@ export function connect(commands: Array<string>) {
 			key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
 		} else {
 			console.log('Can\'t Find an SSH key.');
+			reject(new Error('Can\'t Find an SSH key.'))
 		}
 		const newcmds = commands.join('&&');
 		if (Object.keys(conf.all).length < 4) {
