@@ -22,6 +22,7 @@
 		"prepublish": "npm run build",
 		"prebuild": "npm run clean && echo Using TypeScript && tsc --version",
 		"build": "tsc --pretty",
+		"docs": "typedoc --out docs/ src/",
 		"watch": "npm run build -- --watch"
 	},
 	"dependencies": {
@@ -49,6 +50,7 @@
 		"rimraf": "^2.6.2",
 		"ts-jest": "^21.2.1",
 		"ts-node": "^3.3.0",
+		"typedoc": "^0.9.0",
 		"typescript": "^2.7.0-dev.20171112"
 	},
 	"jest": {
