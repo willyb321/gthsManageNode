@@ -5,7 +5,7 @@ import * as yargs from 'yargs';
 const pkg = require('../package.json');
 
 yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
-	.command('config', 'Get config', (yargs) => {
+	.command('config', 'Get / Set config', (yargs) => {
 		return yargs.option('set', {
 			alias: 's',
 			describe: 'Set config'
