@@ -4,8 +4,12 @@
  */
 import * as commands from './commands';
 import * as yargs from 'yargs';
+import * as updateNotifier from 'update-notifier';
 
 const pkg = require('../package.json');
+
+updateNotifier({pkg}).notify();
+
 
 yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 	.command('config', 'Get / Set config', (yargs) => {
