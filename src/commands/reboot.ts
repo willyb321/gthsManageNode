@@ -1,4 +1,8 @@
-import { connect } from "./index";
+/**
+ * @module Commands
+ */
+
+import {connect} from './connect';
 
 /**
  * Tells the noticeboard to reboot.

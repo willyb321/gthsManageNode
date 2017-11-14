@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/**
+ * @module Index
+ */
 import * as commands from './commands';
 import * as yargs from 'yargs';
 

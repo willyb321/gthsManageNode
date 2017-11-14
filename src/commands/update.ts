@@ -1,3 +1,7 @@
+/**
+ * @module Commands
+ */
+
 import {connect} from './connect';
 
 /**

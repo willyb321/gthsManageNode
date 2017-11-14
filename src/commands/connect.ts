@@ -1,3 +1,7 @@
+/**
+ * @module Commands
+ */
+
 import * as sequest from 'sequest';
 import {conf} from './config';
 import {existsSync, readFileSync} from 'fs';

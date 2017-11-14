@@ -1,3 +1,7 @@
+/**
+ * @module Commands
+ */
+
 export * from './connect';
 export * from './config';
 export * from './generatesshkey';

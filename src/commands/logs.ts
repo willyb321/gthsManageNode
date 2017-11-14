@@ -1,4 +1,8 @@
-import {connect} from "./connect";
+/**
+ * @module Commands
+ */
+
+import {connect} from './connect';
 
 /**
  * Get logs of docker container
