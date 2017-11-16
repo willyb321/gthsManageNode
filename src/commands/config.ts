@@ -46,17 +46,17 @@ export function createConfig(): Promise<any> {
 				name: 'phone',
 				message: 'What\'s your phone number',
 				validate: function (value: any) {
-					const pass = value.match(/^([01])?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})\s?((?:#|ext\.?\s?|x\.?\s?)(?:\d+)?)?$/i);
+					const pass = value.match(/^([01])?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})\s?((?:#|ext\.?\s?|x\.?\s?)(?:\d+)?)?$/i); // fancy af regex for a phone number
 					if (pass) {
-						return true;
+						return true; // Valid phone
 					}
-					return 'Please enter a valid phone number';
+					return 'Please enter a valid phone number'; // Not valid phone
 				}
 			}
 		];
 
 		inquirer.prompt(questions).then((answers: ConfigAnswers | Object) => {
-			for (const i in answers) {
+			for (const i in answers) { // Iterate through the answers
 				if (answers.hasOwnProperty(i)) {
 					console.log(`Setting ${i} in config`);
 					conf.set(i, answers[i]);
@@ -78,10 +78,10 @@ interface ConfigAnswers {
  * Prints the config
  */
 export function getConfig() {
-	const all: object = conf.all;
-	for (const i in all) {
-		if (all.hasOwnProperty(i)) {
-			console.log(`${i}: ${all[i]}`);
+	const all: ConfigAnswers | Object = conf.all;
+	for (const val in all) {
+		if (all.hasOwnProperty(val)) {
+			console.log(`${val}: ${all[val]}`);
 		}
 	}
 }

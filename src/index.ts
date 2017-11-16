@@ -7,16 +7,20 @@ import * as yargs from 'yargs';
 import * as updateNotifier from 'update-notifier';
 import 'source-map-support/register'
 
-updateNotifier({pkg: commands.pkg}).notify();
+// Notify updates
+updateNotifier({pkg: commands.pkg}).notify
 
+// Catch uncaught exceptions.
 process.on('uncaughtException', (err: Error) => {
 	console.log(`We've had an error: The message is: ${err.message || err}`);
 });
 
+// Catch unhandled rejections.
 process.on('unhandledRejection', (err: Error) => {
 	console.log(`We've had an error: The message is: ${err.message || err}`);
 });
 
+// Basically puts the program together.
 yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 	.command('config', 'Get / Set config', (yargs) => {
 		return yargs.option('set', {
@@ -137,7 +141,7 @@ yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 				}
 			});
 	})
-	.demandCommand(1)
+	.demandCommand(1) // Ensure we get at least 1 command
 	.option('h', {
 		alias: 'help',
 		description: 'display help message'

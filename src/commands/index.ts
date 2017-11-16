@@ -1,4 +1,7 @@
 /**
+ * @fileoverview Export all of the commands for easy to use access basically.
+ */
+/**
  * @module Commands
  */
 
