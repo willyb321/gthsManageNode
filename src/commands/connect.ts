@@ -8,29 +8,41 @@ import {existsSync, readFileSync} from 'fs';
 import {join} from 'path';
 import {homedir} from 'os';
 
-process.on('uncaughtException', err => {
-	console.log(err);
-});
-
-let key;
+/**
+ * SSH Key
+ * @type Buffer
+ */
+let key: Buffer;
 
 /**
  * Run commands on noticeboard.
  * @param {Array<string>} commands - Array of commands to run.
  * @returns {Promise<any>}
  */
-export function connect(commands: Array<string>) {
+export function connect(commands: Array<string>): Promise<null | Error> {
 	return new Promise((resolve, reject) => {
 		if (existsSync(conf.get('sshkey'))) {
-			key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
+			try {
+				key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
+				throw new Error('aaaah');
+			} catch (err) {
+				console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
+			}
 
 		} else if (existsSync(join(homedir(), '.ssh', 'id_rsa'))) {
-			key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
+			try {
+				key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
+				throw new Error('aaaah');
+			} catch (err) {
+				console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
+			}
 		} else {
-			console.log('Can\'t Find an SSH key.');
-			reject(new Error('Can\'t Find an SSH key.'))
+			console.log(`Can't Find an SSH key.`);
+			reject(new Error(`Can't Find an SSH key.`))
 		}
-		const newcmds = commands.join('&&');
+		const newcmds = commands.join(' && ');
+		console.log(`Running the following commands:`);
+		console.log(newcmds);
 		if (Object.keys(conf.all).length < 4) {
 			reject(new Error('run `gthsmanage configcreate` first'));
 		}
@@ -40,9 +52,11 @@ export function connect(commands: Array<string>) {
 		}, (err: Error) => {
 			if (err) {
 				reject(err);
+			} else {
+				resolve();
 			}
-			resolve();
 		});
+		// Pipe output to terminal
 		seq.pipe(process.stdout);
 	});
 }

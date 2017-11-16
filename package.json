@@ -23,7 +23,8 @@
 		"prebuild": "npm run clean && echo Using TypeScript && tsc --version",
 		"build": "tsc --pretty",
 		"docs": "typedoc --out docs/ src/",
-		"watch": "npm run build -- --watch"
+		"watch": "npm run build -- --watch",
+		"test": "jest"
 	},
 	"dependencies": {
 		"configstore": "^3.1.1",
@@ -31,6 +32,7 @@
 		"keypair": "^1.0.1",
 		"node-forge": "^0.7.1",
 		"sequest": "^0.10.0",
+		"source-map-support": "^0.5.0",
 		"ssh-keygen": "^0.4.1",
 		"ssh2": "^0.5.5",
 		"update-notifier": "^2.3.0",

@@ -5,11 +5,17 @@
 import * as commands from './commands';
 import * as yargs from 'yargs';
 import * as updateNotifier from 'update-notifier';
+import 'source-map-support/register'
 
-const pkg = require('../package.json');
+updateNotifier({pkg: commands.pkg}).notify();
 
-updateNotifier({pkg}).notify();
+process.on('uncaughtException', (err: Error) => {
+	console.log(`We've had an error: The message is: ${err.message || err}`);
+});
 
+process.on('unhandledRejection', (err: Error) => {
+	console.log(`We've had an error: The message is: ${err.message || err}`);
+});
 
 yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 	.command('config', 'Get / Set config', (yargs) => {
@@ -137,7 +143,7 @@ yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 		description: 'display help message'
 	})
 	.help('help')
-	.version('version', 'display version', pkg.version) // the version string.
+	.version('version', 'display version', commands.pkg.version) // the version string.
 	.alias('version', 'v')
 	// disable showing help on failures, provide a final message
 	// to display for errors.

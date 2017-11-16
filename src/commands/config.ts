@@ -7,14 +7,21 @@ import * as Configstore from 'configstore';
 import * as path from 'path';
 import * as os from 'os';
 
-const pkg = require('../../package.json');
+/**
+ * The package.json
+ */
+export const pkg = require('../../package.json');
 
+/**
+ * The config store.
+ * @type {Configstore}
+ */
 export const conf: Configstore = new Configstore(pkg.name);
 
 /**
  * Asks questions and makes a config.
  */
-export function createConfig() {
+export function createConfig(): Promise<any> {
 	return new Promise((resolve) => {
 		const questions = [
 			{
