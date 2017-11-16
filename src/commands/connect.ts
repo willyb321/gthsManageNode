@@ -24,7 +24,6 @@ export function connect(commands: Array<string>): Promise<null | Error> {
 		if (existsSync(conf.get('sshkey'))) {
 			try {
 				key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
-				throw new Error('aaaah');
 			} catch (err) {
 				console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
 			}
@@ -32,7 +31,6 @@ export function connect(commands: Array<string>): Promise<null | Error> {
 		} else if (existsSync(join(homedir(), '.ssh', 'id_rsa'))) {
 			try {
 				key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
-				throw new Error('aaaah');
 			} catch (err) {
 				console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
 			}
