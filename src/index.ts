@@ -95,10 +95,6 @@ yargs.usage('Usage: $0 <cmd> [options]') // usage string of application.
 	})
 	.command('generatesshkey', 'Generate an SSH key', {}, () => {
 		commands.genSSHKey()
-			.then(data => {
-
-			})
-			.catch(err => handledErr(err));
 	})
 	.command('getlogs', 'Get noticeboard logs', {}, () => {
 		commands.getLogs()

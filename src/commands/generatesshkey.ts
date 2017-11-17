@@ -9,7 +9,7 @@ import * as keypair from 'keypair';
  * @returns {any}
  */
 export function genSSHKey(): keypair.KeypairResults {
-	const pair = keypair.keypair();
+	const pair = keypair();
 	console.log(pair);
 	return pair;
 }
