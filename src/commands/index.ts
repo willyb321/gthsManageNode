@@ -14,3 +14,4 @@ export * from './update';
 export * from './deployed';
 export * from './deploy';
 export * from './logs';
+export * from './everythingisbrokenhelp';

@@ -25,7 +25,11 @@ export function connect(commands: Array<string>): Promise<null | Error> {
 			try {
 				key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
 			} catch (err) {
-				console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
+				if (err.code === 'ENOENT') {
+					console.log('SSH key not found.')
+				} else {
+					console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
+				}
 			}
 
 		} else if (existsSync(join(homedir(), '.ssh', 'id_rsa'))) {
@@ -33,11 +37,17 @@ export function connect(commands: Array<string>): Promise<null | Error> {
 			try {
 				key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
 			} catch (err) {
+				if (err.code === 'ENOENT') {
+					console.log('SSH key not found.')
+				} else {
+					console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
+				}
 				console.log(`We've had an error, the message is: ${err.message}\nStack (give to Will): ${err.stack}`);
 			}
 		} else {
 			console.log(`Can't Find an SSH key.`);
-			reject(new Error(`Can't Find an SSH key.`))
+			reject(new Error(`Can't Find an SSH key.`));
+			return;
 		}
 		const newcmds = commands.join(' && ');
 		console.log(`Running the following commands:`);

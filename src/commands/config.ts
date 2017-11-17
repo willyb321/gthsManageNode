@@ -21,7 +21,7 @@ export const conf: Configstore = new Configstore(pkg.name);
 /**
  * Asks questions and makes a config.
  */
-export function createConfig(): Promise<any> {
+export function createConfig(): Promise<void> {
 	return new Promise((resolve) => {
 		const questions = [
 			{
@@ -55,7 +55,7 @@ export function createConfig(): Promise<any> {
 			}
 		];
 
-		inquirer.prompt(questions).then((answers: ConfigAnswers | Object) => {
+		inquirer.prompt(questions).then((answers: ConfigAnswers) => {
 			for (const i in answers) { // Iterate through the answers
 				if (answers.hasOwnProperty(i)) {
 					console.log(`Setting ${i} in config`);
@@ -67,7 +67,7 @@ export function createConfig(): Promise<any> {
 	})
 }
 
-interface ConfigAnswers {
+export interface ConfigAnswers {
 	phone: number;
 	port: number;
 	ip: string;
