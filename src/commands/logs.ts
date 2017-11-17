@@ -2,6 +2,7 @@
  * @module Commands
  */
 
+ /** ignore this comment */
 import {connect} from './connect';
 
 /**

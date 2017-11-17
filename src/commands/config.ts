@@ -2,6 +2,8 @@
  * @module Commands
  */
 
+
+ /** ignore this comment */
 import * as inquirer from 'inquirer';
 import * as Configstore from 'configstore';
 import * as path from 'path';

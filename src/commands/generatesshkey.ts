@@ -2,6 +2,7 @@
  * @module Commands
  */
 
+ /** ignore this comment */
 import keypair from 'keypair';
 
 /**
@@ -13,4 +14,3 @@ export function genSSHKey() {
 	console.log(pair);
 	return pair;
 }
-

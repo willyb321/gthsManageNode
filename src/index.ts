@@ -1,7 +1,10 @@
 #!/usr/bin/env node
+
 /**
  * @module Index
  */
+
+ /** ignore this comment */
 import * as commands from './commands';
 import * as yargs from 'yargs';
 import * as updateNotifier from 'update-notifier';
