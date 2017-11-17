@@ -55,7 +55,7 @@ export function createConfig(): Promise<void> {
 			}
 		];
 
-		inquirer.prompt(questions).then((answers: ConfigAnswers) => {
+		inquirer.prompt(questions).then((answers: ConfigAnswers | Object) => {
 			for (const i in answers) { // Iterate through the answers
 				if (answers.hasOwnProperty(i)) {
 					console.log(`Setting ${i} in config`);
