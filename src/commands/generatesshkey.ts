@@ -1,15 +1,14 @@
 /**
  * @module Commands
  */
-
- /** ignore this comment */
-import keypair from 'keypair';
+/** ignore this comment */
+import * as keypair from 'keypair';
 
 /**
  * Generate a SSH key
  * @returns {any}
  */
-export function genSSHKey() {
+export function genSSHKey(): keypair.KeypairResults {
 	const pair = keypair();
 	console.log(pair);
 	return pair;

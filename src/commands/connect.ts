@@ -13,7 +13,7 @@ import {homedir} from 'os';
  * SSH Key
  * @type Buffer
  */
-let key: Buffer;
+let sshKey: Buffer;
 
 /**
  * Run commands on noticeboard.
@@ -24,7 +24,7 @@ export function connect(commands: Array<string>): Promise<any | Error> {
 	return new Promise((resolve, reject) => {
 		if (existsSync(conf.get('sshkey'))) {
 			try {
-				key = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
+				sshKey = readFileSync(conf.get('sshkey') || join(homedir(), '.ssh', 'id_rsa'));
 			} catch (err) {
 				if (err.code === 'ENOENT') {
 					console.log('SSH key not found.')
@@ -36,7 +36,7 @@ export function connect(commands: Array<string>): Promise<any | Error> {
 		} else if (existsSync(join(homedir(), '.ssh', 'id_rsa'))) {
 			console.log('ayy')
 			try {
-				key = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
+				sshKey = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
 			} catch (err) {
 				if (err.code === 'ENOENT') {
 					console.log('SSH key not found.')
@@ -58,7 +58,7 @@ export function connect(commands: Array<string>): Promise<any | Error> {
 		}
 		const seq = sequest(`${conf.get('user') || 'gths'}@${conf.get('ip')}:${conf.get('port')}`, {
 			command: newcmds,
-			privateKey: key
+			privateKey: sshKey
 		}, (err: Error, stdout: String) => {
 			if (err) {
 				reject(err);
