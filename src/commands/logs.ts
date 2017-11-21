@@ -10,5 +10,5 @@ import {connect} from './connect';
  * @returns Promise<any>
  */
 export function getLogs() {
-	return connect(['docker logs simple-todos']);
+	return connect(['/usr/local/bin/docker logs simple-todos']);
 }

@@ -20,7 +20,7 @@ let key: Buffer;
  * @param {Array<string>} commands - Array of commands to run.
  * @returns {Promise<any>}
  */
-export function connect(commands: Array<string>): Promise<null | Error> {
+export function connect(commands: Array<string>): Promise<any | Error> {
 	return new Promise((resolve, reject) => {
 		if (existsSync(conf.get('sshkey'))) {
 			try {
@@ -56,14 +56,14 @@ export function connect(commands: Array<string>): Promise<null | Error> {
 		if (Object.keys(conf.all).length < 4) {
 			reject(new Error('run `gthsmanage configcreate` first'));
 		}
-		const seq = sequest(`willb@${conf.get('ip')}:${conf.get('port')}`, {
+		const seq = sequest(`${conf.get('user') || 'gths'}@${conf.get('ip')}:${conf.get('port')}`, {
 			command: newcmds,
 			privateKey: key
-		}, (err: Error) => {
+		}, (err: Error, stdout: String) => {
 			if (err) {
 				reject(err);
 			} else {
-				resolve();
+				resolve(stdout);
 			}
 		});
 		// Pipe output to terminal

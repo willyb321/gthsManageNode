@@ -45,6 +45,12 @@ export function createConfig(): Promise<void> {
 			},
 			{
 				type: 'input',
+				name: 'user',
+				message: 'User? Just hit enter',
+				default: () => 'gths'
+			},
+			{
+				type: 'input',
 				name: 'phone',
 				message: 'What\'s your phone number',
 				validate: function (value: any) {
