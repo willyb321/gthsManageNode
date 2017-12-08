@@ -34,7 +34,6 @@ export function connect(commands: Array<string>): Promise<any | Error> {
 			}
 
 		} else if (existsSync(join(homedir(), '.ssh', 'id_rsa'))) {
-			console.log('ayy')
 			try {
 				sshKey = readFileSync(join(homedir(), '.ssh', 'id_rsa'));
 			} catch (err) {

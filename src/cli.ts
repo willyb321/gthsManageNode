@@ -96,7 +96,11 @@
 	 .command('generatesshkey', 'Generate an SSH key', {}, () => {
 		 commands.genSSHKey()
 			 .then(data => {
-
+				if (data === true) {
+					process.exit(0);
+				} else {
+					process.exit(1);
+				}
 			 })
 			 .catch(err => handledErr(err));
 	 })

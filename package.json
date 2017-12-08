@@ -43,7 +43,6 @@
 		"@types/inquirer": "^0.0.35",
 		"@types/jest": "^21.1.6",
 		"@types/node": "^8.0.53",
-		"@types/node-forge": "^0.6.10",
 		"@types/rimraf": "^2.0.2",
 		"@types/source-map-support": "^0.4.0",
 		"@types/ssh2": "^0.5.35",
